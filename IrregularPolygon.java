@@ -32,18 +32,35 @@ public class IrregularPolygon {
     }
 
     public double area() {
-        // TODO: Calculate the area.
-        return 0.0;
+        
+        if (myPolygon.size() < 3) return 0.0; 
+        
+        double sum1 = 0.0, sum2 = 0.0;
+        for (int i = 0; i < myPolygon.size(); i++) {
+            Point2D.Double current = myPolygon.get(i);
+            Point2D.Double next = myPolygon.get((i + 1) % myPolygon.size());
+            sum1 += current.x * next.y;
+            sum2 += current.y * next.x;
+        }
+        
+        return 0.5 * Math.abs(sum1 - sum2);
     }
 
-    public void draw()
-    {
+    public void draw() {
         // Wrap the DrawingTool in a try/catch to allow development without need for graphics.
         try {
-            // TODO: Draw the polygon.
-            // Documents: https://pavao.org/compsci/gpdraw/html/gpdraw/DrawingTool.html
+            if (myPolygon.isEmpty()) return; // No points to draw
+            
             DrawingTool pen = new DrawingTool(new SketchPad(500, 500));
-            pen.move(50, 50);
+            Point2D.Double first = myPolygon.get(0);
+            pen.up();
+            pen.move(first.getX(), first.getY());
+            pen.down();
+            
+            for (Point2D.Double point : myPolygon) {
+                pen.move(point.getX(), point.getY());
+            }
+            pen.move(first.getX(), first.getY()); // Close the polygon
         } catch (java.awt.HeadlessException e) {
             System.out.println("Exception: No graphics support available.");
         }
