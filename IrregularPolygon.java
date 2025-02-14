@@ -24,7 +24,7 @@ public class IrregularPolygon {
         
         for (int i = 0; i < myPolygon.size(); i++) {
             Point2D.Double current = myPolygon.get(i);
-            Point2D.Double next = myPolygon.get((i + 1) % myPolygon.size()); // Wrap around to first point
+            Point2D.Double next = myPolygon.get((i + 1) % myPolygon.size()); 
             perimeter += current.distance(next);
         }
         
@@ -47,9 +47,9 @@ public class IrregularPolygon {
     }
 
     public void draw() {
-        // Wrap the DrawingTool in a try/catch to allow development without need for graphics.
+        
         try {
-            if (myPolygon.isEmpty()) return; // No points to draw
+            if (myPolygon.isEmpty()) return; 
             
             DrawingTool pen = new DrawingTool(new SketchPad(500, 500));
             Point2D.Double first = myPolygon.get(0);
@@ -60,7 +60,7 @@ public class IrregularPolygon {
             for (Point2D.Double point : myPolygon) {
                 pen.move(point.getX(), point.getY());
             }
-            pen.move(first.getX(), first.getY()); // Close the polygon
+            pen.move(first.getX(), first.getY()); 
         } catch (java.awt.HeadlessException e) {
             System.out.println("Exception: No graphics support available.");
         }
