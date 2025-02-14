@@ -51,7 +51,7 @@ public class IrregularPolygon {
         try {
             if (myPolygon.isEmpty()) return; 
             
-            DrawingTool pen = new DrawingTool(new SketchPad(500, 500));
+            DrawingTool pen = new DrawingTool(new SketchPad(1000, 1000));
             Point2D.Double first = myPolygon.get(0);
             pen.up();
             pen.move(first.getX(), first.getY());
